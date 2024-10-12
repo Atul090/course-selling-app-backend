@@ -22,3 +22,10 @@ create index and basic routes
 step 2> 
 add routers and handle req efficiently
 step 3>
+add user course and admin rooutes
+step 4>
+create a schema
+> user
+>admin
+>course
+>purchases
