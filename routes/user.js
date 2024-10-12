@@ -1,5 +1,6 @@
 
 const {Router}=require('express');
+
 const userRouter=Router();
 
 
@@ -24,6 +25,6 @@ userRouter.get('/user/purchases', function(req,res){
 
 
 
-moduile.exports = {
-    createUserRoutes
+module.exports = {
+    userRouter:userRouter
 }

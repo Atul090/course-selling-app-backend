@@ -14,3 +14,11 @@ Course Selling Apllication backend analysis
 first build backend then frontend
 set up mongo database
 design the schema structure and the logic
+
+
+
+step 1>
+create index and basic routes
+step 2> 
+add routers and handle req efficiently
+step 3>
