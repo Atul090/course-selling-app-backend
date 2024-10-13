@@ -9,7 +9,7 @@ const { courseRouter } = require('./routes/course');
 const { adminRouter } = require('./routes/admin')
 
 const app= express();
-
+app.use(express.json());
 //ideal structure
 app.use('/api/v1/user', userRouter);  //export a router //using riuter fucntion
 app.use('api/v1/admin', adminRouter);

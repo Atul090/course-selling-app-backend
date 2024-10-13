@@ -59,3 +59,19 @@ purchase schema:
     courseID - linekd to course id in course schema
     userID - linekd to user id in user scheamm
 
+
+13th oct
+// only start if database is up
+// added main fuction
+
+create middlewares`
+
+use express.json();
+if the user exits geenrate a tokens  // SIGNIN PROCESS  
+have a saperate kwt password for user and admin sinins 
+
+
+TO: DO:  -----
+plain text password should not be stored in the database
+hash the passsword and then check with th passsword provided by used and using 
+Bcrypt library
