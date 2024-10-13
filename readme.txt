@@ -67,11 +67,18 @@ purchase schema:
 create middlewares`
 
 use express.json();
+//helps in parsing the incomming json requests andis based on bodu parser middleware
+
 if the user exits geenrate a tokens  // SIGNIN PROCESS  
 have a saperate kwt password for user and admin sinins 
 
 
 TO: DO:  -----
+
+USER ROUTER
 plain text password should not be stored in the database
 hash the passsword and then check with th passsword provided by used and using 
 Bcrypt library
+
+
+ADMIN ROUTER

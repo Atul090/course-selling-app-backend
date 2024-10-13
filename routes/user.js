@@ -3,7 +3,7 @@ const {Router}=require('express');
 const {userModel}=require('../db');
 const jwt=require('jsonwebtoken');
 
-const JWT_USER_PASSWORD= "ATUL"
+const JWT_USER_PASSWORD= process.env.JWT_USER_PASSWORD;
 
 const userRouter=Router();
 
@@ -13,6 +13,7 @@ userRouter.post('/signup', async function (req, res){
     // TODO: HAsh the password for security ## 
     try{
         const user=userModel.findOne({ email: email }) // if it was find then it would return an empty array
+        console.log(user);
         if(user){
             return res.json({
                 message: "User already exists, Please sign in!"

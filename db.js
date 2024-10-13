@@ -8,15 +8,15 @@ const ObjectId= mongoose.Types.ObjectId;
 
 const userSchema=new Schema({
     email: { type: String , unique: true},
-    firstname: String,
-    lastname: String,
+    firstName: String,
+    lastName: String,
     password: String
 })
 
 const adminSchema = new Schema({
     email: { type: String , unique: true},
-    firstname: String,
-    lastname: String,
+    firstName: String,
+    lastName: String,
     password: String
 })
 
