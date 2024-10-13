@@ -29,3 +29,33 @@ create a schema
 >admin
 >course
 >purchases
+
+
+ SCHEMA DESIGN:
+
+ user schema --
+    _id > default object _id
+    email
+    first name
+    lastname
+    password
+
+admin schema:
+    _id
+    email
+    first name
+    passsword
+    lastname
+
+Course schema:
+    _id
+    title
+    price
+    iamge url
+    description
+
+purchase schema:
+    _id
+    courseID - linekd to course id in course schema
+    userID - linekd to user id in user scheamm
+
