@@ -9,27 +9,30 @@ const userRouter=Router();
 //make changes
 
 userRouter.post('/signup', async function (req, res){
-    const { email, firstName, lastName, password } = req.body; // destructuring the req
-    // TODO: HAsh the password for security ## 
-    try{
-        const user=userModel.findOne({ email: email }) // if it was find then it would return an empty array
-        console.log(user);
+    try{    
+        const { email, firstName, lastName, password } = req.body; // destructuring the req
+        // TODO: HAsh the password for security ## 
+        const user=await userModel.findOne({ email: email }) // if it was find then it would return an empty array
+        // console.log(user);
         if(user){
+            console.log("found a entry")
+            // console.log(user)            
             return res.json({
                 message: "User already exists, Please sign in!"
             })
+        } else {
+            await userModel.create({
+                email,
+                firstName,
+                lastName,
+                password
+            })
+            console.log("dtata poushed to db")
         }
-        await userModel.create({
-            email,
-            firstName,
-            lastName,
-            password
-        })
         res.json({
             message: "sign up done"
         })
     } catch(err){
-        console.log(err);
         res.status(500).json({
             message: "error occured during sign up"
         })
@@ -37,7 +40,7 @@ userRouter.post('/signup', async function (req, res){
 })
 
 userRouter.post('/signin', async function(req,res){
-    const { email, password}= req.body;
+    const { email, password }= req.body;
     // ideally passwrod is hased hence the user provide passwrod 
     // could not be compared byh the db passwrd 
     const user= await userModel.findOne({
