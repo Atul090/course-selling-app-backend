@@ -15,7 +15,7 @@ userRouter.post('/signup', async function (req, res){
         const user=await userModel.findOne({ email: email }) // if it was find then it would return an empty array
         // console.log(user);
         if(user){
-            console.log("found a entry")
+            // console.log("found a entry")
             // console.log(user)            
             return res.json({
                 message: "User already exists, Please sign in!"
@@ -56,6 +56,15 @@ userRouter.post('/signin', async function(req,res){
             token: token
         })
     } else {
+        const sign = await userModel.findOne({
+            email: email
+        })
+        if(!sign){
+            res.json({
+                message: "Please sign up modafaka"
+            })
+        }
+        
         res.status(403).json({
             message: "Incorrect Credentials"
         })
