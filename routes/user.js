@@ -6,7 +6,7 @@ const jwt=require('jsonwebtoken');
 const JWT_USER_PASSWORD= process.env.JWT_USER_PASSWORD;
 
 const userRouter=Router();
-
+//make changes
 
 userRouter.post('/signup', async function (req, res){
     const { email, firstName, lastName, password } = req.body; // destructuring the req

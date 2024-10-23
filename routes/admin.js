@@ -10,7 +10,7 @@
 
     adminRouter.post('/signup',async function(req,res){
         console.log("inside post singn up admin route")
-        // TODO: add encryptiopn to the admin password/
+        // TODO: add encryptiopn to the admin password
         const { email, firstName, lastName, password }= req.body;
         try{
             const admin=await adminModel.findOne({email:email})
@@ -38,18 +38,25 @@
 
     adminRouter.post('/signin',async function(req,res){
         const {email, password}=req.body;
+        console.log("1")
         const admin=await adminModel.findOne({
             email: email,
             passsword: password
         })
+        console.log("2")
+
         if(admin){
             const token = jwt.sign({
                 id: admin._id
             }, ADMIN_JWT_PASSWORD);
+            console.log("3")
+
             res.json({
                 token: token    
             })
         } else {
+            console.log("4")
+
             res.status(403).json({
                 message: "Incorerct Credentials"
             })
