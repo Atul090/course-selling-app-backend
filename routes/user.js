@@ -3,10 +3,11 @@ const {Router}=require('express');
 const {userModel}=require('../db');
 const jwt=require('jsonwebtoken');
 
-const JWT_USER_PASSWORD= process.env.JWT_USER_PASSWORD;
+const {JWT_USER_PASSWORD}=require('../config');
+
 
 const userRouter=Router();
-//make changes
+
 
 userRouter.post('/signup', async function (req, res){
     try{    
@@ -64,7 +65,6 @@ userRouter.post('/signin', async function(req,res){
                 message: "Please sign up modafaka"
             })
         }
-        
         res.status(403).json({
             message: "Incorrect Credentials"
         })

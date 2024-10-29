@@ -81,4 +81,9 @@ hash the passsword and then check with th passsword provided by used and using
 Bcrypt library
 
 
-ADMIN ROUTER
+ADMIN ROUTER 
+the same way
+
+
+Middlewares:
+Admin and user
