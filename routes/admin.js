@@ -3,8 +3,10 @@ const {Router}=require('express');
 const jwt = require('jsonwebtoken');
 const {adminModel}=require('../db');
 const {JWT_admin_PASSWORD}=require('../config');
+const { adminMiddleware } = require('../middlewares/admin');
 // adminRouter.use(adminMiddleware)
 
+//different jwts for user and admin
 
 const adminRouter=Router();
 
@@ -67,8 +69,25 @@ adminRouter.post('/signin', async function(req,res){
         })
     }
 })
-adminRouter.put('/course', function (req,res){
 
+adminRouter.post('/course', adminMiddleware, async function(req,res){
+    const { title, description, imageUrl, price } = req.body;
+    //directly upload the image instead of using image url.
+    const course=await adminModel.cerate ({
+        title: title,
+        description: description,
+        imageUrl: imageUrl,
+        price: price,
+        creatorI: req.userId
+    })
+    res.json({
+        message:"added a course",
+        courseId: course._id
+    })
+})
+
+//implement the update endpoint
+adminRouter.put('/course', function (req,res){
     res.json({
         message:"cerate a course"
     })
