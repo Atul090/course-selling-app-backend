@@ -13,7 +13,10 @@ app.use(express.json()); //added middle ware for using json in express
 
 app.use('/api/v1/user', userRouter);  //export a router //using riuter fucntion
 app.use('/api/v1/course', courseRouter);
+app.use('api/v1/admin', adminRouter);
 
+//add routes for admin
+//and super admin 
 
 async function main(){
 
