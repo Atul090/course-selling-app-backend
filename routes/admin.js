@@ -87,13 +87,14 @@ adminRouter.post('/course', adminMiddleware, async function(req,res){
 })
 
 //implement the update endpoint
-adminRouter.put('/course', function (req,res){
+adminRouter.put('/course', async function (req,res){
     res.json({
         message:"cerate a course"
     })
 })
 
-adminRouter.get('/courses',function(req,res){
+adminRouter.get('/course/bulk', async function(req,res){
+    // get all the courses
     res.json({
         message:"get all the admin courses"
     })
