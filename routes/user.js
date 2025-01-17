@@ -81,6 +81,12 @@ userRouter.get('/purchases', userMiddleware, async function(req,res){
     const purchases = await purchaseModel.find({
         userId: userId
     })
+
+    //alsop fetch the couyse data as well
+    const courseData=await courseModel.find({
+        _id: { $in: purchases.map(x => x.courseId)}
+    })
+    
     res.json({
         message: "what are the courses purched by user",
         purchases

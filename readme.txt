@@ -92,3 +92,15 @@ Admin and user
 now the suntionality is to be omplete within 10 days and then i shall proceede with irats assingnments
 
 completing the application by today
+
+
+//addingcourse content
+
+
+
+TO:LDO
+
+-use cookies instead of jwts
+-frontend design
+-front end in react
+
