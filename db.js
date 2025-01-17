@@ -33,6 +33,8 @@ const courseSchema = new Schema({
     creatorID: ObjectId
 })
 
+// ideally the cpurse content shoulb be ALSo present and the table
+// const contentSchema = new Schema({})
 
 const userModel = mongoose.model("user",userSchema);
 const adminModel = mongoose.model("admin", adminSchema);

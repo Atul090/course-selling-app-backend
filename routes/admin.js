@@ -1,9 +1,10 @@
 
 const {Router}=require('express');
 const jwt = require('jsonwebtoken');
-const {adminModel}=require('../db');
+const {adminModel, courseModel}=require('../db');
 const {JWT_admin_PASSWORD}=require('../config');
 const { adminMiddleware } = require('../middlewares/admin');
+const admin = require('../middlewares/admin');
 // adminRouter.use(adminMiddleware)
 
 //different jwts for user and admin
@@ -87,16 +88,43 @@ adminRouter.post('/course', adminMiddleware, async function(req,res){
 })
 
 //implement the update endpoint
-adminRouter.put('/course', async function (req,res){
+adminRouter.put('/course', adminMiddleware, async function (req,res){
+    const adminId=req.userId;
+    const {
+        title,
+        description,
+        imageUrl,
+        price,
+        courseId
+    } =req.body;
+
+    const course=await courseModel.updateOne({
+        _id: courseId,
+        creatorID: adminId
+    },{
+        title: title,
+        description: description,
+        imageUrl: imageUrl,
+        price: price,
+    })
+    
     res.json({
-        message:"cerate a course"
+        message:"updated the course",
+        courseId: course._id
     })
 })
 
 adminRouter.get('/course/bulk', async function(req,res){
     // get all the courses
+    const adminId=req.userId;
+    const courses=await courseModel.find({
+        courseID: adminId
+    });
+
     res.json({
-        message:"get all the admin courses"
+        message:"get all the admin courses",
+        courses
+       
     })
 })
 
