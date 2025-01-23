@@ -98,9 +98,12 @@ completing the application by today
 
 
 
-TO:LDO
+TO:DO
 
 -use cookies instead of jwts
 -frontend design
 -front end in react
+-add a middleware for admin and user
+-deploy the backend on render
+-complete the project by 26th of January 2025
 
