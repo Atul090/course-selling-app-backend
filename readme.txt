@@ -59,11 +59,6 @@ purchase schema:
     courseID - linekd to course id in course schema
     userID - linekd to user id in user scheamm
 
-
-13th oct
-// only start if database is up
-// added main fuction
-
 create middlewares`
 
 use express.json();
