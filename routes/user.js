@@ -2,6 +2,7 @@
 const {Router}=require('express');
 const {userModel, courseModel, purchaseModel}=require('../db');
 const jwt=require('jsonwebtoken');
+const bcrypt = require('bcryptjs')
 
 const {JWT_USER_PASSWORD}=require('../config');
 const { userMiddleware } = require('../middlewares/user');
@@ -13,6 +14,7 @@ const userRouter=Router();
 userRouter.post('/signup', async function (req, res){
     try{    
         const { email, firstName, lastName, password } = req.body; // destructuring the req
+        const hashedPassword = await bcrypt.hash(password,10);
         // TODO: HAsh the password for security ## 
         //ideal case is that the password is hashed and saved in the db
         const user=await userModel.findOne({ email: email }) // if it was find then it would return an empty array
@@ -25,7 +27,7 @@ userRouter.post('/signup', async function (req, res){
                 email,
                 firstName,
                 lastName,
-                password
+                hashedPassword
             })
             console.log("dtata poushed to db")
         }
@@ -40,40 +42,25 @@ userRouter.post('/signup', async function (req, res){
 })
 
 userRouter.post('/signin', async function(req,res){
-    const { email, password }= req.body;
-    //use bcrypt lib
-
-    // ideally passwrod is hased hence the user provide passwrod 
-    // could not be compared byh the db passwrd 
-    const user= await userModel.findOne({
-        email: email,
-        password:password
-    });
-    // if we ussed find the user will return an empty array
-    // if we used find one the it will retun ubnderfined or the user object
-    if(user){
-        const token = jwt.sign({
-            id : user._id
-        }, JWT_USER_PASSWORD);
-
-        //do cookie logic if using cookies
-
-        res.json({
-            token: token
-        })
-    } else {
-        const sign = await userModel.findOne({
+    try{
+        const { email, password }= req.body;
+        const user= await userModel.findOne({
             email: email
-        })
-        if(!sign){
-            res.json({
-                message: "Please sign up modafaka"
-            })
+        });
+        if(!user){
+            return res.status(404).json({message: "user not found"});
         }
-        res.status(403).json({
-            message: "Incorrect Credentials"
-        })
+        const isMatch=await bcrypt.compare(password,user.password);
+
+        const token = jwt.sign({
+            id : user._id,
+        },JWT_USER_PASSWORD);
+
+        res.status(200).json({message:"Login successful"});
+    } catch(error) {
+        res.status(500).json({mesage:"Something went wrong"});
     }
+    
 })
 
 userRouter.get('/purchases', userMiddleware, async function(req,res){
